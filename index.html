@@ -15,41 +15,31 @@
 
   <script type="text/babel">
     const root = document.getElementById("root");
-    let counter =10;
+    let counter = 10;
+ 
     function counterUp(){
       counter = counter + 1;
+      render();
     }
-    const Container = () => (
+
+    function render(){
+     ReactDOM.render(<App />, root);
+    }
+
+    function App(){
+      return(
       <div>
         <span>LALA</span>
         <h3>Total Clicks: {counter}</h3>
-        <Button />
-        <Button />
-        <Button />
-        <Title />
+        <button onClick={counterUp}>Click me! </button>
       </div>
-    );
-
-    const Title = () => (
-          <h3 id="title" onMouseEnter={() => console.log("ENTERR!")}>
-            Hello I am a TiTLE~
-          </h3>);
-
-    const  Button = ()  => (
-
-          <button
-            style={{ backgroundColor: "black" , color: "tomato" ,}}
-            onClick={() => console.log("clickkkkk")}
-          >
-            I'm button
-            </button>
-            );
-            
-            
-
-    ReactDOM.render(<Container />, root);
+      );
+    }
    
-  </script>
+   render();
+   
+     </script>
 
 
 </html>
+
