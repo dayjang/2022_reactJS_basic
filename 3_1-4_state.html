@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById("root");
+
+    function App() {
+      const [counter, setCounter] = React.useState(0);
+      function counterUp() {
+        // modifier function => might have bugs when it is previous style.
+        // setCounter(counter + 1);
+        setCounter((curr) => curr + 1);
+      }
+
+      console.log(counter);
+      console.log("rendered");
+      return (
+        <div>
+          <h3>Total Click: {counter} </h3>
+          <button onClick={counterUp}>Click Me</button>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

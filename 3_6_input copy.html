@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    // JSX looks like html. But there are some differences..
+    // i.e. className, htmlFor
+    function App() {
+      const [amount, setTime] = React.useState(0);
+      const [inverted, setInverted] = React.useState(false);
+      function onChange(event) {
+        setTime(event.target.value);
+      }
+
+      const reset = () => setTime(0);
+      const onFlip = () => {
+        reset();
+        setInverted(!inverted);
+      };
+
+      return (
+        <div>
+          <div>
+            <h1>Converter</h1>
+            <label htmlFor="minutues">Minutes</label>
+            <input
+              value={inverted ? amount * 60 : amount}
+              id="minutes"
+              placeholder="write minutes"
+              type="number"
+              onChange={onChange}
+              disabled={inverted}
+            />
+            <label htmlFor="hours">Hours</label>
+            <input
+              value={inverted ? amount : Math.round(amount / 60)}
+              id="hours"
+              placeholder="write hours"
+              type="number"
+              onChange={onChange}
+              disabled={!inverted}
+            />
+          </div>
+
+          <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>Flip!</button>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
