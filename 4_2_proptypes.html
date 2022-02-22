@@ -8,14 +8,14 @@
   <body>
     <div id="root"></div>
   </body>
-  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js "></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <script type="text/babel">
     const root = document.getElementById("root");
-    function Btn({ text, onClick }) {
+    function Btn({ text, onClick, fs }) {
       console.log(text, " was rendered!!");
       return (
         <button
@@ -26,6 +26,7 @@
             padding: "10px 5px",
             border: 0,
             borderRadius: 5,
+            fontSize: fs,
           }}
         >
           {text}
@@ -36,7 +37,7 @@
 
     Btn.propTypes = {
       text: PropTypes.string,
-      fontSize: PropTypes.number,
+      fs: PropTypes.number.isRequired,
     };
 
     function App() {
@@ -44,7 +45,7 @@
       const changeValue = () => setValue("Revert Change");
       return (
         <div>
-          <Btn text={value} onClick={changeValue} />
+          <Btn text={value} onClick={changeValue} fs={30} />
           <Btn text="Continue" />
         </div>
       );
