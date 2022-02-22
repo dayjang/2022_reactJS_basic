@@ -30,14 +30,14 @@
         </button>
       );
     }
-
+    const MemorizedBtn = React.memo(Btn); // make continue button not be created again! unless prop changes, it won't create one.
     function App() {
       const [value, setValue] = React.useState("Save Changes");
       const changeValue = () => setValue("Revert Change");
       return (
         <div>
-          <Btn text={value} onClick={changeValue} />
-          <Btn text="Continue" />
+          <MemorizedBtn text={value} onClick={changeValue} />
+          <MemorizedBtn text="Continue" />
         </div>
       );
     }
