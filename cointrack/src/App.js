@@ -2,36 +2,31 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [coins, setCoins] = useState([]);
+  const [movies, setMovies] = useState([]);
   useEffect(() => {
-    fetch("https://api.coinpaprika.com/v1/tickers")
-      .then((response) => response.json())
-      .then((data) => {
-        setCoins(data);
+    fetch(
+      "https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year"
+    )
+      .then((res) => res.json())
+      .then((js) => {
+        setMovies(js.data.movies);
         setLoading(false);
       });
   }, []);
 
+  console.log(loading, movies);
   return (
     <div>
       <h1>
-        Here is the list of crpyto currency,{" "}
-        {loading ? "loading...." : `the number of crpyto is ${coins.length}`}
+        Movie {loading ? "loading.." : `list - ${movies.length} movies info`}
       </h1>
       <ul>
-        {coins.map((coin, index) => (
+        {movies.map((item, index) => (
           <li key={index}>
-            {coin.name} {coin.symbol}: ${coin.quotes.USD.price} USD
+            Title:{item.title} Year: {item.year}
           </li>
         ))}
       </ul>
-      {/* <select>
-        {coins.map((coin) => (
-          <option>
-            {coin.name} ({coin.symbol}): ${coin.quotes.USD.price} USD
-          </option>
-        ))}
-      </select> */}
     </div>
   );
 }
